@@ -93,6 +93,24 @@ docker-compose logs -f
 | `afd-pay-linux-amd64` | Linux 64位 (x86_64) | GLIBC 2.17+ |
 | `afd-pay-linux-386` | Linux 32位 (i386) | GLIBC 2.17+ |
 
+### 方式四：Docker 镜像
+
+从 GitHub Container Registry 拉取：
+
+```bash
+docker pull ghcr.io/yukaidi1220/cloudreve-v4-afdianpay:latest
+```
+
+运行：
+
+```bash
+docker run -d \
+  --name afd-pay \
+  -p 5000:5000 \
+  --env-file .env \
+  ghcr.io/yukaidi1220/cloudreve-v4-afdianpay:latest
+```
+
 ---
 
 ## 配置 Cloudreve
