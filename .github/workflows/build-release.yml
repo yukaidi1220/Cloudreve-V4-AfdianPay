@@ -13,25 +13,29 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: windows-latest
+          - os: windows-2019
             artifact_name: afd-pay-windows-amd64.exe
-            pyinstaller_args: --onefile --console
-          - os: ubuntu-latest
+            python_arch: x64
+          - os: windows-2019
+            artifact_name: afd-pay-windows-386.exe
+            python_arch: x86
+          - os: ubuntu-20.04
             artifact_name: afd-pay-linux-amd64
-            pyinstaller_args: --onefile --console
-          - os: macos-latest
-            artifact_name: afd-pay-macos-amd64
-            pyinstaller_args: --onefile --console
+            python_arch: x64
+          - os: ubuntu-20.04
+            artifact_name: afd-pay-linux-386
+            python_arch: x86
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python_arch }}
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          architecture: ${{ matrix.python_arch }}
 
       - name: Install dependencies
         run: |
@@ -40,13 +44,13 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller ${{ matrix.pyinstaller_args }} --name afd-pay --distpath ./dist --workpath ./build src/afd_pay/main.py
+          pyinstaller --onefile --console --name afd-pay --distpath ./dist --workpath ./build src/afd_pay/main.py
 
       - name: Rename artifact
         shell: bash
         run: |
           cd dist
-          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+          if [[ "${{ matrix.os }}" == *"windows"* ]]; then
             mv afd-pay.exe ${{ matrix.artifact_name }}
           else
             mv afd-pay ${{ matrix.artifact_name }}
