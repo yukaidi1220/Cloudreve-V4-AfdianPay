@@ -67,20 +67,7 @@ python -m afd_pay.main
 
 看到 `server_started` 日志说明启动成功。
 
-### 方式二：Docker 部署
-
-```bash
-# 修改 docker-compose.yml 中的环境变量
-vim docker-compose.yml
-
-# 启动
-docker-compose up -d
-
-# 查看日志
-docker-compose logs -f
-```
-
-### 方式三：下载二进制
+### 方式二：下载二进制
 
 直接从 [Releases](https://github.com/yukaidi1220/Cloudreve-V4-AfdianPay/releases) 下载编译好的二进制文件，解压后配置 `.env` 即可运行。
 
@@ -93,23 +80,60 @@ docker-compose logs -f
 | `afd-pay-linux-amd64` | Linux 64位 (x86_64) | GLIBC 2.17+ |
 | `afd-pay-linux-386` | Linux 32位 (i386) | GLIBC 2.17+ |
 
-### 方式四：Docker 镜像
+### 方式三：Docker 镜像
 
-从 GitHub Container Registry 拉取：
+在服务器上新建一个目录，比如 `afd-pay`，进入目录后创建两个文件：
 
-```bash
-docker pull ghcr.io/yukaidi1220/cloudreve-v4-afdianpay:latest
+**1. 新建 `docker-compose.yml`，内容如下：**
+
+```yaml
+services:
+  afd-pay:
+    image: ghcr.nju.edu.cn/yukaidi1220/cloudreve-v4-afdianpay:latest
+    container_name: afd-pay
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5000:5000"
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 ```
 
-运行：
+**2. 新建 `.env`，内容如下，填入实际值：**
+
+```env
+SITE_URL=https://你的cloudreve域名.com
+COMMUNICATION_KEY=你的通信密钥
+AFDIAN_USER_ID=你的爱发电user_id
+AFDIAN_TOKEN=你的爱发电API Token
+PORT=5000
+LOG_LEVEL=INFO
+```
+
+**3. 启动**
 
 ```bash
-docker run -d \
-  --name afd-pay \
-  -p 5000:5000 \
-  --env-file .env \
-  ghcr.io/yukaidi1220/cloudreve-v4-afdianpay:latest
+docker-compose up -d
 ```
+
+**4. 更新**
+
+```bash
+docker-compose pull && docker-compose up -d
+```
+
+
+> 镜像使用南京大学镜像站（ghcr.nju.edu.cn）加速境内访问
+
+> 端口仅暴露到 127.0.0.1，默认不暴露公网。如需公网访问，请部署 Nginx 反向代理，将端口映射到 `5000`。
+
+> 数据库文件保存在 `./data/` 目录，升级时不会丢失
+
 
 ---
 
