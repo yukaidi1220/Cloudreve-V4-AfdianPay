@@ -16,34 +16,18 @@ jobs:
         include:
           - os: windows-latest
             artifact_name: afd-pay-windows-amd64.exe
-            python_arch: x64
-          - os: windows-latest
-            artifact_name: afd-pay-windows-386.exe
-            python_arch: x86
           - os: ubuntu-24.04
             artifact_name: afd-pay-linux-amd64
-            python_arch: x64
-          - os: ubuntu-24.04
-            artifact_name: afd-pay-linux-386
-            python_arch: x86
-            enable_i386: true
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Enable i386 architecture
-        if: matrix.enable_i386 == true
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt-get update
-
-      - name: Set up Python ${{ matrix.python_arch }}
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          architecture: ${{ matrix.python_arch }}
 
       - name: Install dependencies
         run: |
