@@ -1,6 +1,14 @@
 # Cloudreve-V4-AfdianPay
 
+[![GitHub release](https://img.shields.io/github/v/release/yukaidi1220/Cloudreve-V4-AfdianPay?style=flat-square)](https://github.com/yukaidi1220/Cloudreve-V4-AfdianPay/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/yukaidi1220/Cloudreve-V4-AfdianPay/build-release.yml?style=flat-square&label=CI)](https://github.com/yukaidi1220/Cloudreve-V4-AfdianPay/actions)
+
 Cloudreve v4 Pro 自定义支付网关 — 爱发电支付渠道
+
+## 快速开始
+
+下载 Release 二进制 → 配置 `.env` → 运行 → 接入 Cloudreve
 
 ## 这是什么？
 
@@ -11,6 +19,12 @@ Cloudreve v4 Pro 自定义支付网关 — 爱发电支付渠道
                                                           ↓
 Cloudreve 开通权益 ← AfdPay 回调通知 ← 爱发电 Webhook 通知
 ```
+
+## 环境要求
+
+- **Python**：3.12+
+- **Docker**：20.10+（仅 Docker 部署方式需要）
+- **Docker Compose**：2.0+（仅 Docker 部署方式需要）
 
 ## 前置准备
 
@@ -76,9 +90,7 @@ python -m afd_pay.main
 | 文件名 | 适用系统 | 最低要求 |
 |--------|----------|----------|
 | `afd-pay-windows-amd64.exe` | Windows 64位 | Windows 10+ |
-| `afd-pay-windows-386.exe` | Windows 32位 | Windows 10+ |
 | `afd-pay-linux-amd64` | Linux 64位 (x86_64) | GLIBC 2.17+ |
-| `afd-pay-linux-386` | Linux 32位 (i386) | GLIBC 2.17+ |
 
 ### 方式三：Docker 镜像
 
