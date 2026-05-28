@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+*.pyo
+
+.env
+data/
+*.db
+*.db-shm
+*.db-wal
+
+dist/
+*.egg-info/
+.eggs/
+venv/
+.venv/
+.pytest_cache/
+
+# 参考资料（不提交到仓库）
+Cloudreve-AfdianPay-master/
+docs/

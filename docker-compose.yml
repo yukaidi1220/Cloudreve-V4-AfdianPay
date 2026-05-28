@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  afd-pay:
+    build: .
+    container_name: afd-pay
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - SITE_URL=https://demo.cloudreve.org
+      - COMMUNICATION_KEY=your_communication_key
+      - AFDIAN_USER_ID=your_afdian_user_id
+      - AFDIAN_TOKEN=your_afdian_api_token
+      - PORT=5000
+      - LOG_LEVEL=INFO
+      - USER_AGENT_CLOUDREVE=AfdPay
+      - USER_AGENT_AFDIAN=AfdPay
+      - AFDIAN_API_BASE=https://ifdian.net
+      - AFDIAN_API_FALLBACK=https://afdian.com
+      - AFDIAN_PAYMENT_BASE=https://ifdian.net
+    volumes:
+      - ./data:/app/data
