@@ -36,7 +36,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller --onefile --console --name afd-pay --distpath ./dist --workpath ./build --collect-all afd_pay src/afd_pay/main.py
+          pyinstaller --onefile --console --name afd-pay --distpath ./dist --workpath ./build --collect-all afd_pay src/run.py
 
       - name: Rename artifact
         shell: bash
