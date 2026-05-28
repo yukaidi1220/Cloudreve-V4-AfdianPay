@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import json
+from decimal import Decimal, InvalidOperation
 
 from quart import Blueprint, current_app, request
 import structlog
@@ -70,8 +73,8 @@ async def afdian_webhook():
 
     # 用 API 返回的数据做金额校验（比 Webhook 推送的数据更可信）
     try:
-        api_amount_fen = int(round(float(verified.get("total_amount", "0")) * 100))
-    except (ValueError, TypeError):
+        api_amount_fen = int(Decimal(verified.get("total_amount", "0")) * 100)
+    except (ValueError, TypeError, InvalidOperation):
         logger.warning("webhook_api_bad_amount", order_no=order_no)
         return _ok()
 

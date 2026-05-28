@@ -1,4 +1,4 @@
-# AfdPay
+# Cloudreve-V4-AfdianPay
 
 Cloudreve v4 Pro 自定义支付网关 — 爱发电支付渠道
 
@@ -39,7 +39,7 @@ Cloudreve 开通权益 ← AfdPay 回调通知 ← 爱发电 Webhook 通知
 
 ```powershell
 # 克隆项目
-git clone https://github.com/你的用户名/afd-pay.git
+git clone https://github.com/yukaidi1220/Cloudreve-V4-AfdianPay.git afd-pay
 cd afd-pay
 
 # 安装依赖
