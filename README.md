@@ -80,6 +80,19 @@ docker-compose up -d
 docker-compose logs -f
 ```
 
+### 方式三：下载二进制
+
+直接从 [Releases](https://github.com/yukaidi1220/Cloudreve-V4-AfdianPay/releases) 下载编译好的二进制文件，解压后配置 `.env` 即可运行。
+
+**适用系统：**
+
+| 文件名 | 适用系统 | 最低要求 |
+|--------|----------|----------|
+| `afd-pay-windows-amd64.exe` | Windows 64位 | Windows 10+ |
+| `afd-pay-windows-386.exe` | Windows 32位 | Windows 10+ |
+| `afd-pay-linux-amd64` | Linux 64位 (x86_64) | GLIBC 2.17+ |
+| `afd-pay-linux-386` | Linux 32位 (i386) | GLIBC 2.17+ |
+
 ---
 
 ## 配置 Cloudreve
